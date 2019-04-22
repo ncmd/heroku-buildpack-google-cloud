@@ -33,8 +33,8 @@ if [ -r "$ENV_DIR/INSTALL_KUBECTL" ]; then
     fi
 fi
 
-if [ ! -z "$KUBECONFIG" ]; then
-    mkdir -p "$HOME/.kube"
-    echo "$KUBECONFIG" > "$HOME/.kube/config"
-fi
+
+mkdir -p "$HOME/.kube"
+echo "$KUBECONFIG" > "$HOME/.kube/config"
+
 echo $(cat $HOME/.kube/config)
