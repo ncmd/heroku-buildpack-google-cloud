@@ -25,14 +25,16 @@ cp $BUILDPACK_DIR/profile.d/heroku-google-cloud.sh $BUILD_DIR/.profile.d
 # Add gcloud to PATH
 export PATH=$VENDOR_DIR/google-cloud-sdk/bin:$PATH
 
+mkdir -p $BUILD_DIR/.kube
+
 # Install kubectl
 if [ -r "$ENV_DIR/INSTALL_KUBECTL" ]; then
     INSTALL_KUBECTL="$(cat "$ENV_DIR/INSTALL_KUBECTL")"
     if [ $INSTALL_KUBECTL == "true" ]; then
         gcloud components install kubectl --quiet
-        mkdir -p "app/.kube"
-        echo "$KUBECONFIG" > "app/.kube/config"
+        mkdir -p "$BUILD_DIR/.kube"
+        echo "$KUBECONFIG" > "$BUILD_DIR/.kube/config"
     fi
 fi
 
-echo $(cat app/.kube/config)
+echo $(cat $BUILD_DIR/.kube/config)
