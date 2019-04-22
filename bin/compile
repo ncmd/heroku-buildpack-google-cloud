@@ -30,9 +30,9 @@ if [ -r "$ENV_DIR/INSTALL_KUBECTL" ]; then
     INSTALL_KUBECTL="$(cat "$ENV_DIR/INSTALL_KUBECTL")"
     if [ $INSTALL_KUBECTL == "true" ]; then
         gcloud components install kubectl --quiet
-        mkdir -p "$HOME/.kube"
-        echo "$KUBECONFIG" > "$HOME/.kube/config"
+        mkdir -p "app/.kube"
+        echo "$KUBECONFIG" > "app/.kube/config"
     fi
 fi
 
-echo $(cat $HOME/.kube/config)
+echo $(cat app/.kube/config)
